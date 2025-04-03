@@ -19,6 +19,8 @@ An easy to use exporter which will export Zeebe records to a configured Kafka to
   * [Supported Zeebe versions](#supported-zeebe-versions)
   * [Backwards compatibility](#backwards-compatibility)
   * [Quick start](#quick-start)
+    * [Docker](#docker)
+    * [Manual setup](#manual-setup)
   * [Usage](#usage)
     + [Kafka configuration](#kafka-configuration)
       - [Transactions](#transactions)
@@ -33,7 +35,6 @@ An easy to use exporter which will export Zeebe records to a configured Kafka to
   * [Build from source](#build-from-source)
     + [Prerequisites](#prerequisites)
     + [Building](#building)
-  * [Backwards compatibility](#backwards-compatibility-1)
   * [Report issues or contact developers](#report-issues-or-contact-developers)
   * [Create a Pull Request](#create-a-pull-request)
   * [Commit Message Guidelines](#commit-message-guidelines)
@@ -41,28 +42,24 @@ An easy to use exporter which will export Zeebe records to a configured Kafka to
 
 ## Supported Zeebe versions
 
-Version 1.x and 2.x is compatible with the following Zeebe versions:
-
-- 0.23.x
-- 0.24.x
-- 0.25.x
-- 0.26.x
-
-Version 3.x is compatible with the following Zeebe versions:
-
-- 1.0
-
-## Backwards compatibility
-
-As there is currently only a single maintainer, only the latest major version will be maintained and
-supported.
-
-At the moment, the only guarantees for backwards compatibility are:
-
-- the exporter's configuration
-- the serde module
+Each exporter uses the Zeebe protocol according to Zeebe of the same version.
 
 ## Quick start
+
+### Docker
+
+A ready to use Docker compose setup is provided for local installation.
+Checkout [./docker-compose-8.6-kafka](./docker-compose-8.6-kafka/README.md) for details.
+
+For a quick start download and use the [ZIP file available](./docker-compose-8.6-kafka.zip):
+
+ ```bash
+ unzip docker-compose-8.6-kafka.zip
+ cd docker-compose-8.6-kafka
+ docker compose up -d
+ ```
+
+### Manual setup
 
 The quickest way to get started is:
 
@@ -273,58 +270,6 @@ public final class MyClass {
   }
 }
 ```
-
-### Docker
-
-The [docker-compose.yml](/docker-compose.yml) found in the root of the project is a good example of
-how you can deploy Zeebe, Kafka, and connect them via the exporter.
-
-To run it, first build the correct exporter artifact which `docker-compose` can find. From the root
-of the project, run:
-
-```shell
-mvn install -DskipTests -Dexporter.finalName=zeebe-kafka-exporter
-```
-
-> It's important here to note that we set the artifact's final name - this allows us to use a fixed
-> name in the `docker-compose.yml` in order to mount the file to the Zeebe container.
-
-Then you start the services - they can be started in parallel with no worries.
-
-```shell
-docker-compose up -d
-```
-
-> If you wish to stop these containers, remember that some of them create volumes, so unless you
-> plan on reusing those make sure to bring everything down using `docker-compose down -v`.
-
-The services started are the following:
-
-- zeebe: with the gateway port (26500) opened
-- kafka: with the standard 9092 port opened for internal communication, and port 29092 for external
-- consumer: a simple kafkacat image which will print out every record published on any topic
-  starting with `zeebe`
-- zookeeper: required to start Kafka
-
-Once everything is up and running, use your Zeebe cluster as you normally would. For example, given
-a workflow at `~/workflow.bpmn`, you could deploy it as:
-
-```shell
-zbctl --insecure deploy ~/workflow.bpmn
-```
-
-After this, you can see the messages being consumed by the consumer running:
-
-```shell
-docker logs -f consumer
-```
-
-> You may see some initial error logs from the consumer - this happens while the Kafka broker isn't
-> fully up, but it should stop once kafkacat can connect to it.
-
-> The first time a record of a certain kind (e.g. deployment, job, workflow, etc.) is published, it
-> will create a new topic for it. The consumer is refreshing the list of topics every second, which
-> means that for that first message there may be a bit of delay.
 
 ## Reference
 
