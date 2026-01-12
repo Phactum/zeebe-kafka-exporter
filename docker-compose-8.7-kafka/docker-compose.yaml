@@ -45,7 +45,6 @@ services:
 
   zeebe: # https://docs.camunda.io/docs/self-managed/platform-deployment/docker/#zeebe
     # image: camunda/zeebe:${CAMUNDA_ZEEBE_VERSION} # see zeebe/Dockerfile
-    platform: linux/amd64
     build:
       context: ./zeebe
       args:
