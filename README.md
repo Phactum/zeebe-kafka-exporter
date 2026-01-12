@@ -48,10 +48,17 @@ Each exporter uses the Zeebe protocol according to Zeebe of the same version.
 
 ### Docker
 
-A ready to use Docker compose setup is provided for local installation.
-Checkout [./docker-compose-8.6-kafka](./docker-compose-8.6-kafka/README.md) for details.
+A ready-to-use Docker compose setup is provided for local usage.
+Checkout
 
-For a quick start download and use the [ZIP file available](./docker-compose-8.6-kafka.zip):
+- [./docker-compose-8.6-kafka](./docker-compose-8.6-kafka/README.md)
+- [./docker-compose-8.8-kafka](./docker-compose-8.8-kafka/README.md)
+
+for details.
+
+For a quick start download and use one of the ZIP files available:
+- [docker-compose-8.6-kafka.zip](./docker-compose-8.6-kafka.zip):
+- [docker-compose-8.8-kafka.zip](./docker-compose-8.8-kafka.zip):
 
  ```bash
  unzip docker-compose-8.6-kafka.zip
