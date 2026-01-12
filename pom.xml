@@ -554,4 +554,12 @@
     <developerConnection>scm:git:https://github.com/phactum/zeebe-kafka-exporter.git</developerConnection>
     <url>https://github.com/phactum/zeebe-kafka-exporter/tree/main</url>
   </scm>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>github</id>
+      <name>Github Packages</name>
+      <url>https://maven.pkg.github.com/phactum/zeebe-kafka-exporter</url>
+    </snapshotRepository>
+  </distributionManagement>
 </project>
