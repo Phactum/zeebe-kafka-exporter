@@ -52,12 +52,14 @@ A ready-to-use Docker compose setup is provided for local usage.
 Checkout
 
 - [./docker-compose-8.6-kafka](./docker-compose-8.6-kafka/README.md)
+- [./docker-compose-8.7-kafka](./docker-compose-8.7-kafka/README.md)
 - [./docker-compose-8.8-kafka](./docker-compose-8.8-kafka/README.md)
 
 for details.
 
 For a quick start download and use one of the ZIP files available:
 - [docker-compose-8.6-kafka.zip](./docker-compose-8.6-kafka.zip):
+- [docker-compose-8.7-kafka.zip](./docker-compose-8.7-kafka.zip):
 - [docker-compose-8.8-kafka.zip](./docker-compose-8.8-kafka.zip):
 
  ```bash
